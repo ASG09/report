@@ -14,8 +14,9 @@ export const createReport = async (cv, template) => {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
+      responseType: 'blob'  // Added to allow downloading the file
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error('Error uploading file:', error);
     throw error;
