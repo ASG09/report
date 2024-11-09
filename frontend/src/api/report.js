@@ -4,12 +4,13 @@ const api = axios.create({
   baseURL: 'http://localhost:8000',
 });
 
-export const uploadCV = async (file) => {
+export const createReport = async (cv, template) => {
   const formData = new FormData();
-  formData.append('file', file);
+  formData.append('cv', cv);
+  formData.append('template', template);
 
   try {
-    const response = await api.post('/upload-cv', formData, {
+    const response = await api.post('/create-report', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

@@ -1,13 +1,12 @@
-version: '3.8'
-
 services:
   backend:
     build:
       context: ./backend
+    volumes:
+      - ./backend:/app  # Mounts backend folder for live updates
     ports:
       - "8000:8000"
-    networks:
-      - app-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   frontend:
     build:
@@ -18,9 +17,3 @@ services:
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./frontend:/app  # Mount the frontend folder to allow for live updates
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge

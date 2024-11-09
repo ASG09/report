@@ -13,16 +13,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/")
 async def root():
     return {"message": "Backend is running!"}
 
-@app.post("/upload-cv")
-async def upload_cv(file: UploadFile = File(...)):
-    content = await file.read()
+
+@app.post("/create-report")
+async def create_report(cv: UploadFile = File(...), template: UploadFile = File(...)):
+    cv = await cv.read()
+    template = await template.read()
 
     return JSONResponse(content={
-        "filename": file.filename,
-        "content_type": file.content_type,
-        "file_size": len(content)
+        "success": True,
     })
