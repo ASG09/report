@@ -19,12 +19,23 @@ function Header() {
     console.log('Selected Template:', event.target.files[0]);
   };
 
+  const createAndDownloadReport = (response) => {
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = 'generated_report.docx';
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission
     if (cvFile && templateFile) {
       try {
         const response = await createReport(cvFile, templateFile);
-        console.log('Report created successfully:', response);
+        createAndDownloadReport(response);
       } catch (error) {
         console.error('Error creating report:', error);
       }
