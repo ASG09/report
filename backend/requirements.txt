@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+python-docx  # For DOCX manipulation
+pypdf2       # For PDF parsing
+python-multipart  # For file uploads in FastAPI
