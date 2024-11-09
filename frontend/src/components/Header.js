@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { createReport } from '../api/report';
+import './Header.css';
 
 function Header() {
   const [cvFile, setCvFile] = useState(null);
